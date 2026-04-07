@@ -12,7 +12,7 @@ export default function authenticateToken(req, res, next)
 
 	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
 		if (err) {
-			return res.status(403).json({"message": "Token cannot be verified"});
+			return res.status(403).send("Token cannot be verified");
 		}
 
 		req.user = user;

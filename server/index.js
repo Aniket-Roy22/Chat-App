@@ -3,6 +3,10 @@ dotenv.config();
 import express from "express";
 import jwt from "jsonwebtoken";
 import authenticateToken from "./middleware/authenticateToken.js";
+import {
+	generateAccessToken,
+	generateRefreshToken,
+} from "./utils/generateToken.js";
 
 const PORT = 3000;
 const app = express();
@@ -30,8 +34,18 @@ app.post("/login", (req, res) => {
 	const username = req.body.username;
 	const user = { name: username };
 
-	const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-	res.json({ accessToken: accessToken });
+	const accessToken = generateAccessToken(user);
+	const refreshToken = generateRefreshToken(user);
+	res.json({
+		accessToken: accessToken,
+		refreshToken: refreshToken,
+	});
+});
+
+app.post("/token", (req, res) => {
+	const refreshToken = req.body.refreshToken;
+	
+	res.status(200).send(`Token received: ${refreshToken}`);
 });
 
 app.listen(PORT, () => {
