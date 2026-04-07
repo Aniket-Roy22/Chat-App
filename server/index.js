@@ -2,7 +2,10 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import jwt from "jsonwebtoken";
-import authenticateToken from "./middleware/authenticateToken.js";
+import {
+	authenticateAccessToken,
+	authenticateRefreshToken,
+} from "./middleware/authenticateTokens.js";
 import {
 	generateAccessToken,
 	generateRefreshToken,
@@ -24,7 +27,7 @@ const posts = [
 app.use(express.json({limit: "1mb"}));
 app.use(express.urlencoded({extended: true}));
 
-app.get("/posts", authenticateToken, (req, res) => {
+app.get("/posts", authenticateAccessToken, (req, res) => {
 	res.status(200).json(posts.filter(post => post.username === req.user.name));
 });
 
@@ -36,16 +39,20 @@ app.post("/login", (req, res) => {
 
 	const accessToken = generateAccessToken(user);
 	const refreshToken = generateRefreshToken(user);
-	res.json({
+	res.status(200).json({
 		accessToken: accessToken,
 		refreshToken: refreshToken,
 	});
 });
 
-app.post("/token", (req, res) => {
-	const refreshToken = req.body.refreshToken;
-	
-	res.status(200).send(`Token received: ${refreshToken}`);
+app.post("/token", authenticateRefreshToken, (req, res) => {
+	const username = req.user.name;
+	const user = {name: username};
+
+	const newAccessToken = generateAccessToken(user);
+	res.status(200).json({
+		accessToken: newAccessToken,
+	});
 });
 
 app.listen(PORT, () => {
