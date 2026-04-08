@@ -14,6 +14,7 @@ export function userLogin(req, res)
 		res.cookie("refreshToken", refreshToken, {
 			httpOnly: true,
 			secure: false,
+			path: "/auth",
 			sameSite: "lax",
 			maxAge: 1 * 60 * 1000
 		});
