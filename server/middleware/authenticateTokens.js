@@ -19,10 +19,9 @@ export function authenticateAccessToken(req, res, next) {
 }
 
 export function authenticateRefreshToken(req, res, next) {
-	const authHeader = req.headers["authorization"];
-	const token = authHeader && authHeader.split(" ")[1];
+	const token = req.cookies?.refreshToken;
 
-	if (token == null) {
+	if (!token) {
 		return res.status(401).send("Refresh token not found");
 	}
 

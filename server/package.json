@@ -5,13 +5,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"authServer": "nodemon index.js",
+    "authServer": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3"
