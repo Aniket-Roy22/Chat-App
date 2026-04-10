@@ -2,10 +2,10 @@ import { generateAccessToken } from "../utils/generateToken.js";
 
 export function regenAccessToken(req, res)
 {
-	const username = req.user.name;
-	const user = {name: username};
+	const user = req.user;
+	const payload = { username: user.username };
 
-	const newAccessToken = generateAccessToken(user);
+	const newAccessToken = generateAccessToken(payload);
 	res.status(200).json({
 		accessToken: newAccessToken,
 	});
