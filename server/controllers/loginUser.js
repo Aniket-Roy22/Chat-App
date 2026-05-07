@@ -5,8 +5,7 @@ import {
 
 export function userLogin(req, res)
 {
-	const user = req.user;
-	const payload = {username: user.username};
+	const payload = req.user;
 
 	const accessToken = generateAccessToken(payload);
 	const refreshToken = generateRefreshToken(payload);
