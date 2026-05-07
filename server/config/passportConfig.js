@@ -2,17 +2,6 @@ import passport from "passport";
 import prisma from "./prisma.js"
 import { Strategy as LocalStrategy } from "passport-local";
 
-const userList = [
-	{
-		username: "Ani",
-		password: "2212"
-	},
-	{
-		username: "Ash",
-		password: "1908"
-	}
-];
-
 passport.use(
 	new LocalStrategy(async (username, password, done) => {
 		const user = await prisma.users.findUnique({
