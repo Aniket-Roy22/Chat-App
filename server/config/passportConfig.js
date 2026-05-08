@@ -16,7 +16,7 @@ passport.use(
 		});
 		
 		if (!user) {
-		  return done(null, false, { message: "User not found" });
+		  return done(null, false, { message: "USER_NOT_FOUND" });
 		}
 	  
 		// const isMatch = await bcrypt.compare(
@@ -25,7 +25,7 @@ passport.use(
 		// );
 	  
 		if (user.passwordhash != password) {
-		  return done(null, false, { message: "Invalid credentials" });
+		  return done(null, false, { message: "INVALID_PASSWORD" });
 		}
 	  
 		return done(null, {

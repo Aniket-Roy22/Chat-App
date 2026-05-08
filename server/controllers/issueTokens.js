@@ -3,7 +3,7 @@ import {
 	generateRefreshToken,
 } from "../utils/generateToken.js";
 
-export function userLogin(req, res)
+export function issueTokens(req, res)
 {
 	const payload = req.user;
 
