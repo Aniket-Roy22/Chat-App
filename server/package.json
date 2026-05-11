@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "auth": "nodemon authServer.js",
-	"chat": "nodemon chatServer.js",
+    "auth": "nodemon src/authServer.js",
+	"chat": "nodemon src/chatServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
