@@ -5,18 +5,14 @@ export async function getConversation(req, res)
 	try
 	{
 		const currentUserId = req.user.id;
-		const {otherUsername} = req.params;
+		const {contactID} = req.params;
 		const otherUser = await prisma.users.findUnique({
 			where: {
-				username: otherUsername,
-			},
-			select: {
-				id: true,
+				id: contactID,
 			}
 		});
-		const otherUserId = otherUser?.id;
 		
-		if (!otherUserId) {
+		if (!otherUser) {
 			return res.status(404).json({
 				message: "USER_NOT_FOUND",
 			});
@@ -27,10 +23,10 @@ export async function getConversation(req, res)
 				OR: [
 					{
 						sender_id: currentUserId,
-						receiver_id: otherUserId,
+						receiver_id: contactID,
 					},
 					{
-						sender_id: otherUserId,
+						sender_id: contactID,
 						receiver_id: currentUserId,
 					},
 				],
