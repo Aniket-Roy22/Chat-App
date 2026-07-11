@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "auth": "nodemon src/authServer.js",
-	"chat": "nodemon src/chatServer.js",
+    "chat": "nodemon src/chatServer.js",
+	"socket": "nodemon src/sockServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -19,13 +20,15 @@
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.3",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "pg": "^8.20.0"
+    "pg": "^8.20.0",
+    "socket.io": "^4.8.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.14",
-    "prisma": "^7.8.0"
+    "prisma": "^6.19.3"
   }
 }
