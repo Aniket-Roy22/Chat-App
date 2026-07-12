@@ -18,6 +18,8 @@ export function issueTokens(req, res)
 		maxAge: 1 * 60 * 1000
 	});
 	res.status(200).json({
+		id: payload.id,
+		username: payload.username,
 		accessToken: accessToken
 	});
 }
