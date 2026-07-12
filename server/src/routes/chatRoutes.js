@@ -2,12 +2,14 @@ import express from "express";
 import {authenticateAccessToken} from "../middleware/authenticateTokens.js";
 import {getConversation} from "../controllers/getConversation.js";
 import {getContacts} from "../controllers/getContacts.js";
+import {addContact} from "../controllers/addContact.js";
 
 const router = express.Router();
 
 router.use(authenticateAccessToken);
 
 router.get("/user/contacts", getContacts);
+router.post("/user/contacts", addContact);
 router.get("/user/:contactID", getConversation);
 
 export default router;
